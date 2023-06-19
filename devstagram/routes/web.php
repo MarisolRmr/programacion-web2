@@ -38,7 +38,7 @@ Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'store'])->name('login');
 
 //Ruta de logout
-Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
+Route::get('/logout',[LogoutController::class, 'store'])->name('logout');
 
 //Username personalizado
 Route::get('/{user:username}',[PostController::class, 'index'])->name('posts.index');
@@ -52,7 +52,7 @@ Route::post('/imagenes',[ImagenController::class, 'store'])->name('imagenes.stor
 //Ruta para almacenar post
 Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
 
-Route::get('/{user:username}/{post}', [PostController::class, 'show'])->name('posts.show');
+Route::get('/{user:username}/posts/{post}', [PostController::class, 'show'])->name('posts.show');
 //Route::get('/{user:username}/posts/{post}', [PostController::class, 'show'])->name('posts.show');
 
 Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
