@@ -9,8 +9,6 @@ class Comentario extends Model
 {
     use HasFactory;
     
-    protected $table = 'post';
-
     protected $fillable = [
         'user_id',
         'post_id',
