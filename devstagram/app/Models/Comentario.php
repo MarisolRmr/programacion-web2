@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Comentario extends Model
 {
     use HasFactory;
+    
+    protected $table = 'post';
 
     protected $fillable = [
         'user_id',
