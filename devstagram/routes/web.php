@@ -54,6 +54,7 @@ Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
 
 //Ruta para generar comenttarios
 Route::get('/{user:username}/posts/{post}', [PostController::class, 'show'])->name('posts.show');
+Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
 
 //Ruta para elimnar el post
 Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');

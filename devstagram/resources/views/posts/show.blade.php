@@ -24,6 +24,20 @@
                 </p>
             </div>
 
+            @auth
+                @if($post->user_id === auth()->user()->id )
+                    <form method="POST" action="{{ route('posts.destroy', $post) }}">
+                        @method('DELETE')
+                        @csrf
+                        <input 
+                            type="submit"
+                            value="Eliminar Publicación"
+                            class="bg-red-500 hover:bg-red-600 p-2 rounded text-white font-bold mt-4 cursor-pointer"
+                        />
+                    </form>
+                @endif
+            @endauth
+
             
         </div>
 
@@ -75,8 +89,8 @@
                                 <a href="{{ route('posts.index', $comentario->user ) }} " class="font-bold">
                                     {{$comentario->user->username}}
                                 </a>
-                                <p>{{ $comentario->comentario }}
-                                <p class="text-sm text-gray-500">{{ $comentario->created_at->diffForHumans() }}
+                                <p>{{ $comentario->comentario }}</p>
+                                <p class="text-sm text-gray-500">{{ $comentario->created_at->diffForHumans() }} </p>
                             </div>
                         @endforeach
                     @else
