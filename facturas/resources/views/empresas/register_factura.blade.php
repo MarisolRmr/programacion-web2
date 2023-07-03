@@ -1,8 +1,14 @@
 @extends('layouts.app')
 
 @section('titulo')
-Registrar Empresa Emisora
+    Registrar Facturas
 @endsection
+
+<!-- Directiva para integrar los estilos de Dropzone-->
+@push('styles')
+    <!-- Estilo Dropzone-->
+    <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+@endpush
 
 @section('contenido_top')
 <div class="absolute bg-y-50 w-full top-0 bg-[url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/profile-layout-header.jpg')] min-h-75">
@@ -33,66 +39,44 @@ Registrar Empresa Emisora
 
 <div class="w-full p-6 mx-auto">
   <div class="flex flex-wrap -mx-3">
-
-  
+    
+    
     <div class="w-full max-w-full px-3 shrink-0 md:w-8/12 md:flex-0">
       <div class="relative flex flex-col min-w-0 break-words bg-white border-0 shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
         <div class="border-black/12.5 rounded-t-2xl border-b-0 border-solid p-6 pb-0">
           <div class="flex items-center">
             <p class="mb-0 dark:text-white/80">Ingrese los siguientes datos</p>
+            
           </div>
         </div>
-        
-      <form action="{{route ('emisora', auth()->user()->username)}}" method="POST" novalidate>
-        @csrf
-
-        @if(session('mensaje'))
-              <div class="bg-green-500 p-2 rounded-lg mb-6 text-black text-center uppercase font-bold">
-                {{session('mensaje')}}
-              </div>
-        @endif
         <div class="flex-auto p-6">
           <div class="flex flex-wrap -mx-3">
             <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
               <div class="mb-4">
-                <label for="razon_social" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">Razón social</label>
-                <input 
-                type="text" 
-                id="razon_social" 
-                name="razon_social" 
-                placeholder="Razón social" 
-                class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none @error('razon_social') border-red-500 @enderror"  
-                value="{{old('razon_social')}}"/>
-              </div>
-            </div>
-
-            <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
-              <div class="mb-4">
-                <label for="correo_contacto" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">Correo de contacto</label>
-                <input 
-                type="email" 
-                id="correo_contacto" 
-                name="correo_contacto" 
-                placeholder="Correo de contacto" 
-                class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none @error('correo_contacto') border-red-500 @enderror" 
-                value="{{old('correo_contacto')}}"
-                />
+                <label for="empresa_emisora" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">Empresa Emisora</label>
+                <input type="text" id="empresa_emisora" name="empresa_emisora" placeholder="Empresa Emisora" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
               </div>
             </div>
             <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
               <div class="mb-4">
-                <label for="rfc_emiso" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">RFC emiso</label>
-                <input 
-                type="text" 
-                id="rfc_emiso" 
-                name="rfc_emiso" 
-                placeholder="RFC Emiso" 
-                class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none @error('rfc_emiso') border-red-500 @enderror" 
-                value="{{old('rfc_emiso')}}"
-                />
+                <label for="rfc_receptor" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">RFC receptor</label>
+                <input type="text" id="rfc_receptor" name="rfc_receptor" placeholder="RFC receptor" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
+              </div>
+            </div>
+            <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
+              <div class="mb-4">
+                <label for="folio" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">Folio de Factura</label>
+                <input type="text" id="folio" name="folio" placeholder="Folio de Factura" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
               </div>
             </div>
           </div>
+
+       <!-- DROPZONE -->
+        <form action="/IMAGENES" method="POST" enctype="multipart/form-data" id="dropzone" class="dropzone border-dashed border-2 w-full h-96 rounded flex flex-col justify-center items-center">
+            @csrf  
+        </form>
+    
+        
           
           <input
               type="submit"
@@ -100,7 +84,6 @@ Registrar Empresa Emisora
               class="inline-block w-full px-16 py-3.5 mt-6 mb-0 font-bold leading-normal text-center text-white align-middle transition-all bg-blue-500 border-0 rounded-lg cursor-pointer hover:-translate-y-px active:opacity-85 hover:shadow-xs text-sm ease-in tracking-tight-rem shadow-md bg-150 bg-x-25"
             />
         </div>
-      </form>
         
       </div>
     </div>
