@@ -21,6 +21,9 @@ use App\Http\Controllers\FacturaController;
 
 Route::get('/', [HomeController::class, 'home'])->name('home');
 
+Route::post('/buscar', [HomeController::class, 'buscar'])->name('buscar');
+
+
 Route::get('/login', [LoginController::class, 'login'])->name('login');
 
 Route::post('/login', [LoginController::class, 'store'])->name('login.store');
@@ -38,12 +41,21 @@ Route::get('/{user:username}', [EmpresaEmisoraController::class, 'index'])->name
 Route::get('/{user:username}/registrar_ee', [EmpresaEmisoraController::class, 'register'])->name('emisora');
 Route::post('/{user:username}/registrar_ee', [EmpresaEmisoraController::class, 'store'])->name('emisora.store');
 Route::get('/{user:username}/listado_ee', [EmpresaEmisoraController::class, 'listado'])->name('emisora.listado');
+Route::delete('/listado_ee/{factura}', [EmpresaEmisoraController::class, 'destroy'])->name('emisora.destroy');
+
 
 // Vista Registrar empresa receptora
 Route::get('/{user:username}/registrar_er', [EmpresaReceptoraController::class, 'registrar_er'])->name('receptora');
 Route::post('/{user:username}/registrar_er', [EmpresaReceptoraController::class, 'store'])->name('receptora.store');
 Route::get('/{user:username}/listado_er', [EmpresaReceptoraController::class, 'listado'])->name('receptora.listado');
+Route::delete('/listado_er/{factura}', [EmpresaReceptoraController::class, 'destroy'])->name('receptora.destroy');
 
 // vista Registrar factura
 Route::get('/{user:username}/registrar_fa', [FacturaController::class, 'registrar_fa'])->name('factura');
+Route::post('/{user:username}/registrar_fa', [FacturaController::class, 'store'])->name('factura.store');
+Route::get('/{user:username}/listado_fa', [FacturaController::class, 'listado'])->name('factura.listado');
+Route::delete('/listado_fa/{factura}', [FacturaController::class, 'destroy'])->name('factura.destroy');
 
+
+Route::post('/registrar_fa_pdf', [FacturaController::class, 'storepdf'])->name('factura.storepdf');
+Route::post('/registrar_fa_xml', [FacturaController::class, 'storexml'])->name('factura.storexml');

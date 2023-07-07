@@ -42,7 +42,7 @@
             <div
                 class="relative flex flex-col min-w-0 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
                 <div class="p-6 pb-0 mb-0 border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
-                    <h6 class="dark:text-white">Listado de Empresas Emisoras</h6>
+                    <h6 class="dark:text-white">Listado de Facturas Registradas</h6>
                 </div>
                 <div class="flex-auto px-0 pt-0 pb-2">
                     <div class="p-0 overflow-x-auto">
@@ -62,6 +62,15 @@
                                     <th
                                         class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
                                         RFC Emisor</th>
+
+                                    <th
+                                        class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
+                                        PDF</th>
+
+                                    <th
+                                        class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
+                                        XML</th>
+
                                     <th
                                         class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
                                     </th>
@@ -69,41 +78,69 @@
                                 </tr>
                             </thead>
 
-                            @if ($empresa_emisora->count())
+                            @if ($facturas->count())
                                 <tbody>
 
-                                    @foreach ($empresa_emisora as $emisora)
+                                    @foreach ($facturas as $factura)
                                         <tr>
 
                                             <td
                                                 class="p-2 text-center align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
                                                 <p
                                                     class="mb-0 text-xs leading-tight dark:text-white dark:opacity-80 text-slate-400">
-                                                    {{ $emisora->id }} </p>
+                                                    {{ $factura->id }} </p>
                                             </td>
 
                                             <td
                                                 class="p-2 text-center align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
                                                 <p
                                                     class="mb-0 text-xs leading-tight dark:text-white dark:opacity-80 text-slate-400">
-                                                    {{ $emisora->razon_social }}</p>
+                                                    {{ $factura->empresaEmisora->razon_social }}</p>
                                             </td>
 
                                             <td
                                                 class="p-2 text-center align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
                                                 <p
                                                     class="mb-0 text-xs leading-tight dark:text-white dark:opacity-80 text-slate-400">
-                                                    {{ $emisora->correo_contacto }}</p>
+                                                    {{ $factura->empresaReceptora->nombre }}</p>
                                             </td>
 
                                             <td
                                                 class="p-2 text-center align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
                                                 <p
                                                     class="mb-0 text-xs leading-tight dark:text-white dark:opacity-80 text-slate-400">
-                                                    {{ $emisora->rfc_emiso }}</p>
+                                                    {{ $factura->folio_factura }}</p>
                                             </td>
 
-                                            <form action="{{ route('emisora.destroy', $emisora->id) }}" method="POST"
+                                            <td
+                                                class="p-2 text-center align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
+                                                <p
+                                                    class="mb-0 text-xs leading-tight dark:text-white dark:opacity-80 text-slate-400">
+                                                    @if ($factura->archivopdf)
+                                                        <a href="{{ asset('uploadspdf/' . $factura->archivopdf) }}"
+                                                            target="_blank"> PDF
+                                                        </a>
+                                                    @else
+                                                        N/A
+                                                    @endif
+                                                </p>
+                                            </td>
+
+                                            <td
+                                                class="p-2 text-center align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
+                                                <p
+                                                    class="mb-0 text-xs leading-tight dark:text-white dark:opacity-80 text-slate-400">
+                                                    @if ($factura->archivoxml)
+                                                        <a href="{{ asset('uploadsxml/' . $factura->archivoxml) }}"
+                                                            target="_blank"> XML
+                                                        </a>
+                                                    @else
+                                                        N/A
+                                                    @endif
+                                                </p>
+                                            </td>
+
+                                            <form action="{{ route('factura.destroy', $factura->id) }}" method="POST"
                                                 id="form-delete">
                                                 @csrf
                                                 @method('DELETE')
@@ -120,7 +157,7 @@
                                     @endforeach
                                 </tbody>
                             @else
-                                <p class="p-10 text-center">No hay Empresas Emisoras Registradas</p>
+                                <p class="p-10 text-center">No hay Facturas Registradas</p>
                             @endif
 
                         </table>
