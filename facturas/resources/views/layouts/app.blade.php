@@ -10,10 +10,18 @@
 
 
     {{-- Estilos de tailwind --}}
-    @vite('resources/css/app.css')
+    @vite('resources/css/app.css') 
+    {{-- <link rel="stylesheet" href="/resources/css/app.css"> --}}
+
 
     {{-- Scripts de tailwind --}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dropzone@5.9.3/dist/min/dropzone.min.css">
+    {{-- <script src="https://cdn.jsdelivr.net/npm/dropzone@5.9.3/dist/min/dropzone.min.js"></script>     --}}
+
+    
+    {{-- <script src="resources/js/app.js"></script> --}}
     @vite('resources/js/app.js')
+
 
     <!-- Fonts and icons -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
@@ -27,6 +35,11 @@
     @vite('resources/css/nucleo-svg.css')
     @vite('resources/css/argon-dashboard-tailwind.css')
 
+    {{-- <link rel="stylesheet" href="resources/css/nucleo-icons.css">
+    <link rel="stylesheet" href="resources/css/nucleo-icons.css">
+    <link rel="stylesheet" href="resources/css/nucleo-svg.css">
+    <link rel="stylesheet" href="resources/css/argon-dashboard-tailwind.css"> --}}
+
     <!-- Popper -->
     <script src="https://unpkg.com/@popperjs/core@2"></script>
 
@@ -34,6 +47,11 @@
     @vite('resources/js/plugins/perfect-scrollbar.min.js')
     @vite('resources/js/argon-dashboard-tailwind.js')
     @vite('resources/js/argon-dashboard-tailwind.min.js')
+
+    {{-- <script src="resources/js/plugins/chartjs.min.js"></script>
+    <script src="resources/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="resources/js/argon-dashboard-tailwind.js"></script>
+    <script src="resources/js/argon-dashboard-tailwind.min.js"></script> --}}
 
     <title>Facturas</title>
 </head>
@@ -77,14 +95,9 @@
                         </a>
                     </li>
 
-                    <li class="w-full mt-4">
-                        <h6 class="pl-6 ml-2 text-xs font-bold leading-tight uppercase dark:text-white opacity-60">Registrar
-                        </h6>
-                    </li>
-
                     <li class="mt-0.5 w-full">
                         <a class=" dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors"
-                            href="{{ route('emisora', auth()->user()->username) }} ">
+                            href=" {{ route('emisora.listado', auth()->user()->username) }} ">
                             <div
                                 class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
                                 <i class="relative top-0 text-sm leading-normal text-orange-500 ni ni-calendar-grid-58"></i>
@@ -95,7 +108,7 @@
 
                     <li class="mt-0.5 w-full">
                         <a class=" dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors"
-                            href="{{ route('receptora', auth()->user()->username) }} ">
+                            href=" {{ route('receptora.listado', auth()->user()->username) }} ">
                             <div
                                 class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center fill-current stroke-0 text-center xl:p-2.5">
                                 <i class="relative top-0 text-sm leading-normal text-emerald-500 ni ni-credit-card"></i>
@@ -106,7 +119,7 @@
 
                     <li class="mt-0.5 w-full">
                         <a class=" dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors"
-                            href="{{ route('factura', auth()->user()->username) }} ">
+                            href="{{ route('factura.listado', auth()->user()->username) }}">
                             <div
                                 class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
                                 <i class="relative top-0 text-sm leading-normal text-cyan-500 ni ni-app"></i>
@@ -115,59 +128,9 @@
                         </a>
                     </li>
 
-                    <li class="w-full mt-4">
-                        <h6 class="pl-6 ml-2 text-xs font-bold leading-tight uppercase dark:text-white opacity-60">Listados
-                        </h6>
-                    </li>
-
-                    <li class="mt-0.5 w-full">
-                        <a class=" dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors"
-                            href=" {{ route('emisora.listado', auth()->user()->username) }} ">
-                            <div
-                                class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
-                                <i class="relative top-0 text-sm leading-normal text-red-600 ni ni-world-2"></i>
-                            </div>
-                            <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Empresas Emisoras</span>
-                        </a>
-                    </li>
-
-                    <li class="mt-0.5 w-full">
-                        <a class=" dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors"
-                            href=" {{ route('receptora.listado', auth()->user()->username) }} ">
-                            <div
-                                class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
-                                <i class="relative top-0 text-sm leading-normal text-slate-700 ni ni-single-02"></i>
-                            </div>
-                            <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Empresa Receptora</span>
-                        </a>
-                    </li>
-
-                    <li class="mt-0.5 w-full">
-                        <a class=" dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors"
-                            href="{{ route('factura.listado', auth()->user()->username) }}">
-                            <div
-                                class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
-                                <i class="relative top-0 text-sm leading-normal text-orange-500 ni ni-single-copy-04"></i>
-                            </div>
-                            <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Facturas</span>
-                        </a>
-                    </li>
-
-                    {{-- <li class="mt-0.5 w-full">
-                        <a class=" dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors"
-                            href="">
-                            <div
-                                class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
-                                <i class="relative top-0 text-sm leading-normal text-cyan-500 ni ni-collection"></i>
-                            </div>
-                            <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Reportes</span>
-                        </a>
-                    </li> --}}
-
 
                     <li class="w-full mt-4">
-                        <h6 class="pl-6 ml-2 text-xs font-bold leading-tight uppercase dark:text-white opacity-60">Portal
-                            Web</h6>
+                        <h6 class="pl-6 ml-2 text-xs font-bold leading-tight uppercase dark:text-white opacity-60">Portal Web</h6>
                     </li>
 
                     <li class="mt-0.5 w-full">
@@ -284,6 +247,7 @@
             @yield('contenido')
         </main>
 
+        
 </body>
 
 </html>

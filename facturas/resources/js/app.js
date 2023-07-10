@@ -96,4 +96,3 @@ dropzonexml.on('removedfile', function () {
     document.querySelector('[name="archivoxml"]').value = '';
 });
 
-

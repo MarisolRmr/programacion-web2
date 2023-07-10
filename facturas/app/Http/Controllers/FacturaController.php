@@ -10,10 +10,9 @@ use App\Models\EmpresaEmisora;
 use App\Models\EmpresaReceptora;
 use Illuminate\Support\Facades\File;
 
-class FacturaController extends Controller
-{
-    public function registrar_fa(User $user)
-    {
+
+class FacturaController extends Controller{
+    public function registrar_fa(User $user){
 
         $empresasEmisoras = EmpresaEmisora::all();
         $empresasReceptoras = EmpresaReceptora::all();
@@ -23,8 +22,7 @@ class FacturaController extends Controller
         ], compact('empresasEmisoras', 'empresasReceptoras'));
     }
 
-    public function listado(User $user)
-    {
+    public function listado(User $user){
 
         $facturas = Factura::all();
 
@@ -34,10 +32,9 @@ class FacturaController extends Controller
         ]);
     }
 
-    public function store(Request $request)
-    {
+    public function store(Request $request){
 
-        // dd($request->all());
+        //dd($request->all());
 
         // Validación de campos
         $request->validate([

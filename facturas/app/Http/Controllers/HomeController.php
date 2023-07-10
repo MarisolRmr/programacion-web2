@@ -23,8 +23,7 @@ class HomeController extends Controller
     }
 
     // funcion para buscar una factura
-    public function buscar(Request $request)
-    {
+        public function buscar(Request $request){
         // Validación de campos
         $request->validate([
             'rfc_emisor' => 'required',
@@ -44,13 +43,18 @@ class HomeController extends Controller
             ->first();
 
         if ($facturaEncontrada) {
-            // Factura encontrada, mostrar mensaje de éxito
-            session()->flash('success', $facturaEncontrada->id);
+            // Factura encontrada, redirigir a la vista de factura encontrada
+            return redirect()->route('encontrada')->with('facturaEncontrada', $facturaEncontrada);
         } else {
-            // Factura no encontrada, mostrar mensaje de error
-            session()->flash('error');
+            // Factura no encontrada, redirigir a la vista del formulario de búsqueda
+            return redirect()->route('home')->with('error', 'Factura no encontrada');
         }
-
-        return redirect()->route('home')->withInput();
     }
+
+    public function facturaencontrada(){
+        $facturaEncontrada = session('facturaEncontrada');
+
+        return view('encontrada', compact('facturaEncontrada'));
+    }
+
 }

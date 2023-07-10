@@ -20,18 +20,18 @@ use App\Http\Controllers\FacturaController;
 */
 
 Route::get('/', [HomeController::class, 'home'])->name('home');
-
 Route::post('/buscar', [HomeController::class, 'buscar'])->name('buscar');
+Route::get('/factura_encontrada', [HomeController::class, 'facturaencontrada'])->name('encontrada');
 
-
+// Vista de iniciar sesión
 Route::get('/login', [LoginController::class, 'login'])->name('login');
-
 Route::post('/login', [LoginController::class, 'store'])->name('login.store');
 
+// Vista de registrarse
 Route::get('/register', [RegisterController::class, 'register'])->name('register');
-
 Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
 
+// Cerrar sesión
 Route::get('/logout', [LogoutController::class, 'store'])->name('logout');
 
 // Dasboard administrador
@@ -42,7 +42,6 @@ Route::get('/{user:username}/registrar_ee', [EmpresaEmisoraController::class, 'r
 Route::post('/{user:username}/registrar_ee', [EmpresaEmisoraController::class, 'store'])->name('emisora.store');
 Route::get('/{user:username}/listado_ee', [EmpresaEmisoraController::class, 'listado'])->name('emisora.listado');
 Route::delete('/listado_ee/{factura}', [EmpresaEmisoraController::class, 'destroy'])->name('emisora.destroy');
-
 
 // Vista Registrar empresa receptora
 Route::get('/{user:username}/registrar_er', [EmpresaReceptoraController::class, 'registrar_er'])->name('receptora');
@@ -59,3 +58,5 @@ Route::delete('/listado_fa/{factura}', [FacturaController::class, 'destroy'])->n
 
 Route::post('/registrar_fa_pdf', [FacturaController::class, 'storepdf'])->name('factura.storepdf');
 Route::post('/registrar_fa_xml', [FacturaController::class, 'storexml'])->name('factura.storexml');
+
+Route::get('facturas/pdf', [FacturaController::class, 'generatePdf'])->name('facturas.pdf');

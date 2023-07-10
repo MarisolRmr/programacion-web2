@@ -4,10 +4,6 @@
     Iniciar Sesión
 @endsection
 
-@section('contenido_top')
-
-@endsection
-
 @section('contenido')
 <div class="flex items-center min-h-screen p-0 overflow-hidden bg-center bg-cover">
     <div style="max-width: 50%;">

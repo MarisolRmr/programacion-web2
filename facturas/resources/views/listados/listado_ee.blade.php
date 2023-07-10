@@ -15,8 +15,7 @@
     <br> <br>
     <div class="relative w-full mx-auto mt-500 ">
 
-        <div
-            class="relative flex flex-col flex-auto min-w-0 p-4 mx-6 overflow-hidden break-words bg-white border-0 dark:bg-slate-850 dark:shadow-dark-xl shadow-3xl rounded-2xl bg-clip-border">
+        <div class="relative flex flex-col flex-auto min-w-0 p-4 mx-6 overflow-hidden break-words bg-white border-0 dark:bg-slate-850 dark:shadow-dark-xl shadow-3xl rounded-2xl bg-clip-border">
             <div class="flex flex-wrap -mx-3">
                 <div class="flex-none w-auto max-w-full px-3">
                     <div
@@ -30,9 +29,32 @@
                         <p class="mb-0 font-semibold leading-normal dark:text-white dark:opacity-60 text-sm">Admin</p>
                     </div>
                 </div>
+                <div class="w-full max-w-full px-3 mx-auto mt-4 sm:my-auto sm:mr-0 md:w-1/2 md:flex-none lg:w-4/12">
+                    <div class="relative right-0">
+                      <ul class="relative flex flex-wrap p-1 list-none bg-gray-50 rounded-xl" nav-pills role="tablist">
+                        <li class="z-30 flex-auto text-center">
+                          <a href="{{ route('emisora', auth()->user()->username) }} " class="z-30 flex items-center justify-center w-full px-0 py-1 mb-0 transition-all ease-in-out border-0 rounded-lg bg-inherit text-slate-700" nav-link active href="javascript:;" role="tab" aria-selected="true">
+                            <i class="fas fa-plus"></i>
+                            <span class="ml-2">Agregar</span>
+                          </a>
+                        </li>
+                        <li class="z-30 flex-auto text-center">
+                            <a class="z-30 flex items-center justify-center w-full px-0 py-1 mb-0 transition-all ease-in-out border-0 rounded-lg bg-inherit text-slate-700" nav-link href="javascript:;" role="tab" aria-selected="false">
+                              <i class="fas fa-file-pdf"></i>
+                              <span class="ml-2">PDF</span>
+                            </a>
+                        </li>
+                        <li class="z-30 flex-auto text-center">
+                            <a class="z-30 flex items-center justify-center w-full px-0 py-1 mb-0 transition-all ease-in-out border-0 rounded-lg bg-inherit text-slate-700" nav-link href="javascript:;" role="tab" aria-selected="false">
+                              <i class="fas fa-file-excel"></i>
+                              <span class="ml-2">Excel</span>
+                            </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
             </div>
         </div>
-
     </div>
 
     <br>
@@ -128,7 +150,12 @@
                 </div>
             </div>
         </div>
+
+        
+
     </div>
+
+    
 
 
 @endsection

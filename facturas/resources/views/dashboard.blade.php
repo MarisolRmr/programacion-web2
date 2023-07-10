@@ -156,114 +156,12 @@
 
         </div>
 
-        @if (session('success'))
-            <div class="alert alert-success">
-                <div class="flex flex-col">
-                    <div class="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
-                        <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-                            <div class="overflow-hidden">
-                                <table class="min-w-full">
-                                    <thead class="bg-gray-200 border-b">
-                                        <tr>
-                                            <th scope="col"
-                                                class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                                ID
-                                            </th>
-                                            <th scope="col"
-                                                class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                                Empresa Emisora
-                                            </th>
-                                            <th scope="col"
-                                                class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                                Empresa Receptora
-                                            </th>
-                                            <th scope="col"
-                                                class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                                Folio de Factura
-                                            </th>
-                                            <th scope="col"
-                                                class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                                PDF
-                                            </th>
-                                            <th scope="col"
-                                                class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                                XML
-                                            </th>
-                                            <th scope="col"
-                                                class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                                Creado
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($facturas as $factura)
-                                            @if ($factura->id == session('success'))
-                                                <tr
-                                                    class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
-
-                                                    <td
-                                                        class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                        {{ $factura->id }}</td>
-
-                                                    <td
-                                                        class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                        {{ $factura->empresaEmisora->razon_social }}
-                                                    </td>
-
-                                                    <td
-                                                        class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                        {{ $factura->empresaReceptora->nombre }}
-                                                    </td>
-
-                                                    <td
-                                                        class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                        {{ $factura->folio_factura }}
-                                                    </td>
-
-                                                    <td
-                                                        class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                        @if ($factura->archivopdf)
-                                                            <a href="{{ asset('uploadspdf/' . $factura->archivopdf) }}"
-                                                                target="_blank"> PDF
-                                                            </a>
-                                                        @else
-                                                            N/A
-                                                        @endif
-                                                    </td>
-
-                                                    <td
-                                                        class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                        @if ($factura->archivoxml)
-                                                            <a href="{{ asset('uploadsxml/' . $factura->archivoxml) }}"
-                                                                target="_blank">XML
-                                                            </a>
-                                                        @else
-                                                            N/A
-                                                        @endif
-                                                    </td>
-
-                                                    <td
-                                                        class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                        {{ $factura->created_at->format('d-m-Y') }}
-                                                    </td>
-                                                </tr>
-                                            @endif
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        @if (session('error'))
+        <div class="alert alert-danger">
+            <div class="my-10 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 pr-10 lg:px-8">
+                <h1 class="text-black text-sm lg:text-2xl text-center font-bold">{{ session('error') }}</h1>
             </div>
-        @else
-            <div class="alert alert-danger">
-                <div class="my-10 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 pr-10 lg:px-8">
-                    <h1 class="text-black text-sm lg:text-2xl text-center font-bold">Factura no registrada en la base
-                        de datos
-                    </h1>
-                </div>
-            </div>
+        </div>
         @endif
 
         <footer class="pt-4">
